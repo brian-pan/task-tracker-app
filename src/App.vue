@@ -2,16 +2,20 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <Tasks :tasks="tasks" />
+    <!-- use v-bind when you want the value to be 'dynamic'; variable change values; not fixed -->
   </div>
 </template>
 
 <!-- logic -->
 <script>
 import Header from "./components/Header";
+import Tasks from "./components/Tasks";
 
 export default {
   name: "App",
-  components: { Header },
+  // register components here after importing them:
+  components: { Header, Tasks },
   data() {
     return {
       tasks: [],
