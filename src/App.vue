@@ -1,7 +1,7 @@
 <!-- output -->
 <template>
   <div class="container">
-    <h1>Hello World</h1>
+    <Header title="Task Tracker" />
   </div>
 </template>
 
