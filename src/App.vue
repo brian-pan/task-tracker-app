@@ -12,6 +12,34 @@ import Header from "./components/Header";
 export default {
   name: "App",
   components: { Header },
+  data() {
+    return {
+      tasks: [],
+    };
+  },
+  // life cycle
+  created() {
+    this.tasks = [
+      {
+        id: 1,
+        title: "Learn Vue",
+        day: "Monday Jun 12",
+        reminder: true,
+      },
+      {
+        id: 2,
+        title: "Learn Vuex",
+        day: "Monday Jun 19",
+        reminder: true,
+      },
+      {
+        id: 3,
+        title: "Learn Vue Router",
+        day: "Tuesday Jul 5",
+        reminder: false,
+      },
+    ];
+  },
 };
 </script>
 
