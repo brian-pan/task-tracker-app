@@ -1,10 +1,16 @@
 <template>
   <!-- {{ }} used in html template to write variables -->
   <!-- VS. in React: { } used in JSX && {{}} used only when inline styling -->
-  <div :class="[task.reminder ? 'reminder' : '', 'task']">
+  <div
+    @dblclick="$emit('toggle-reminder', task.id)"
+    :class="[task.reminder ? 'reminder' : '', 'task']"
+  >
     <h3>
       {{ task.title }}
-      <i class="fas fa-times"></i>
+      <i @click="$emit('delete-task', task.id)" class="fas fa-times"></i>
+      <!-- <=> @click="$emit("delete-task", task.id)" -->
+      <!-- VS. in React: -->
+      <!-- <=> onClick={() => onDeleteTask(task.id)} -->
     </h3>
     <p>{{ task.day }}</p>
   </div>
@@ -16,6 +22,13 @@ export default {
   props: {
     task: Object,
   },
+  // methods: {
+  //   onDelete(id) {
+  //     //use this.$emit to emit an event; pass the func up to the parent
+  //     //this.$emit("name-you-created", param);
+  //     this.$emit("delete-task", id);
+  //   },
+  // },
 };
 </script>
 
