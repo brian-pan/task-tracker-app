@@ -2,7 +2,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
-    <AddTask />
+    <AddTask @add-task="addTask" />
     <Tasks
       :tasks="tasks"
       @delete-task="deleteTask"
@@ -37,6 +37,10 @@ export default {
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
+    },
+    addTask(task) {
+      // this.tasks.push(task);
+      this.tasks = [...this.tasks, task];
     },
   },
   // life cycle

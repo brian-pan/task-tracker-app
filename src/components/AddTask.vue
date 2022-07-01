@@ -1,16 +1,22 @@
 <template>
-  <form class="add-form">
+  <form @submit="onSubmit" class="add-form">
     <div class="form-control">
       <label>Task</label>
-      <input type="text" name="text" placeholder="Add Task" />
+      <input type="text" v-model="title" name="title" placeholder="Add Task" />
     </div>
     <div class="form-control">
       <label>Day & Time</label>
-      <input type="text" name="day" placeholder="Add Day & Time" />
+      <input
+        type="text"
+        v-model="day"
+        name="day"
+        placeholder="Add Day & Time"
+      />
     </div>
     <div class="form-control form-control-check">
       <label>Set Reminder</label>
-      <input type="checkbox" name="reminder" />
+      <input type="checkbox" v-model="reminder" name="reminder" />
+      <!-- v-model gives a bind between input and data -->
     </div>
 
     <input type="submit" value="Save Task" class="btn btn-block" />
@@ -20,6 +26,40 @@
 <script>
 export default {
   name: "AddTask",
+  data() {
+    return {
+      // initial state || default value for the form
+      // useState() in React {}
+      title: "",
+      day: "",
+      reminder: false,
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+
+      if (!this.title) {
+        alert("Please add a task");
+        return;
+      }
+
+      const newTask = {
+        id: Math.floor(Math.random() * 100),
+        title: this.title,
+        day: this.day,
+        reminder: this.reminder,
+      };
+
+      //emit upward
+      this.$emit("add-task", newTask);
+
+      // clear form
+      this.title = "";
+      this.day = "";
+      this.reminder = false;
+    },
+  },
 };
 </script>
 
