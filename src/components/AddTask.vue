@@ -1,21 +1,28 @@
 <template>
   <form @submit="onSubmit" class="add-form">
     <div class="form-control">
-      <label>Task</label>
-      <input type="text" v-model="title" name="title" placeholder="Add Task" />
+      <label for="title">Task</label>
+      <input
+        type="text"
+        v-model="title"
+        name="title"
+        id="title"
+        placeholder="Add Task"
+      />
     </div>
     <div class="form-control">
-      <label>Day & Time</label>
+      <label for="day">Day & Time</label>
       <input
         type="text"
         v-model="day"
         name="day"
+        id="day"
         placeholder="Add Day & Time"
       />
     </div>
     <div class="form-control form-control-check">
-      <label>Set Reminder</label>
-      <input type="checkbox" v-model="reminder" name="reminder" />
+      <label for="reminder">Set Reminder</label>
+      <input type="checkbox" v-model="reminder" name="reminder" id="reminder" />
       <!-- v-model gives a bind between input and data -->
     </div>
 
@@ -26,10 +33,10 @@
 <script>
 export default {
   name: "AddTask",
+  // data() <=> states in React
   data() {
     return {
       // initial state || default value for the form
-      // useState() in React {}
       title: "",
       day: "",
       reminder: false,
