@@ -52,29 +52,17 @@ export default {
     toggleAddTask() {
       this.showAddTask = !this.showAddTask;
     },
+    async fetchTasks() {
+      const res = await fetch("http://localhost:5000/tasks");
+
+      const data = await res.json();
+
+      return data;
+    },
   },
   // life cycle
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        title: "Learn Vue",
-        day: "Monday Jun 12",
-        reminder: true,
-      },
-      {
-        id: 2,
-        title: "Learn Vuex",
-        day: "Monday Jun 19",
-        reminder: true,
-      },
-      {
-        id: 3,
-        title: "Learn Vue Router",
-        day: "Tuesday Jul 5",
-        reminder: false,
-      },
-    ];
+  async created() {
+    this.tasks = await this.fetchTasks();
   },
 };
 </script>
