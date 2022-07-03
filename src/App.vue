@@ -52,10 +52,9 @@ export default {
       //fetch the task wanted to be toggled
       const taskToToggle = await this.fetchTask(id);
       const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
-      // console.log(updatedTask);
 
       //make the request
-      res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const res = await fetch(`http://localhost:5000/tasks/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +66,7 @@ export default {
       //frontend update
       this.tasks = this.tasks.map((task) =>
         // task.id === id ? { ...task, reminder: !task.reminder } : task
-        task.id === id ? { ...task, reminder: !data.reminder } : task
+        task.id === id ? { ...task, reminder: data.reminder } : task
       );
     },
 

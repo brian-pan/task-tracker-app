@@ -9,7 +9,7 @@
     {
       "title": "add task (POST) works",
       "day": "test date 1",
-      "reminder": true,
+      "reminder": false,
       "id": 4
     },
     {
