@@ -35,25 +35,72 @@ export default {
     };
   },
   methods: {
-    deleteTask(id) {
+    async deleteTask(id) {
       if (confirm("Are you sure you want to delete this task?")) {
+        const res = fetch(`http://localhost:5000/tasks/${id}`, {
+          method: "DELETE",
+        });
+        // res.status === 200
+        //   ? (this.tasks = this.tasks.filter((task) => task.id !== id))
+        //   : alert("Something went wrong");
+        console.log(res);
+        console.log(res.status);
         this.tasks = this.tasks.filter((task) => task.id !== id);
       }
     },
-    onToggleReminder(id) {
+    async onToggleReminder(id) {
+      //fetch the task wanted to be toggled
+      const taskToToggle = await this.fetchTask(id);
+      const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+      // console.log(updatedTask);
+
+      //make the request
+      res = await fetch(`http://localhost:5000/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedTask), //PUT the upd task back to api
+      });
+      const data = await res.json();
+
+      //frontend update
       this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
+        // task.id === id ? { ...task, reminder: !task.reminder } : task
+        task.id === id ? { ...task, reminder: !data.reminder } : task
       );
     },
-    addTask(task) {
-      // this.tasks.push(task);
-      this.tasks = [...this.tasks, task];
+
+    // addTask(task) {
+    //   // this.tasks.push(task);
+    //   this.tasks = [...this.tasks, task];
+    // },
+    async addTask(task) {
+      const res = await fetch("http://localhost:5000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+
+      const data = await res.json();
+
+      this.tasks = [...this.tasks, data];
     },
     toggleAddTask() {
       this.showAddTask = !this.showAddTask;
     },
     async fetchTasks() {
       const res = await fetch("http://localhost:5000/tasks");
+
+      const data = await res.json();
+
+      return data;
+    },
+    // fetch a single task for update
+    async fetchTask(id) {
+      const res = await fetch(`http://localhost:5000/tasks/${id}`);
 
       const data = await res.json();
 

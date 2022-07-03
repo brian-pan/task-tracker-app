@@ -1,22 +1,28 @@
 {
   "tasks": [
     {
-      "id": 1,
       "title": "Learn Vue",
-      "day": "Monday Jun 12",
-      "reminder": true
+      "day": "Jun 24, 2022 Sat",
+      "reminder": true,
+      "id": 3
     },
     {
-      "id": 2,
-      "title": "Learn Vuex",
-      "day": "Monday Jun 19",
-      "reminder": true
+      "title": "add task (POST) works",
+      "day": "test date 1",
+      "reminder": true,
+      "id": 4
     },
     {
-      "id": 3,
-      "title": "Learn Vue Router",
-      "day": "Tuesday Jul 5",
-      "reminder": false
+      "title": "task",
+      "day": "jun 1",
+      "reminder": true,
+      "id": 5
+    },
+    {
+      "title": "task 2",
+      "day": "jun 2",
+      "reminder": false,
+      "id": 6
     }
   ]
 }
